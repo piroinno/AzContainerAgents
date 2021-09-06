@@ -1,0 +1,28 @@
+# Yaml pipeline demonstrating the use of containers as azdo agents
+
+# Always a good idea to use the pipeline lineage in the runtime name
+name: $(TeamProject)_$(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
+
+trigger:
+  branches:
+    include:
+    - "*"
+
+stages:
+  - stage: dev
+    jobs:
+    - job: HelloUbuntu
+      pool:
+        vmImage: 'ubuntu-latest'
+      container:
+        image: ubuntu:latest
+      steps:
+      - script: echo hello
+
+    - job: HelloWindows
+      pool:
+        vmImage: 'windows-2019'
+      container:
+        image: mcr.microsoft.com/windows/servercore:ltsc2019
+      steps:
+      - script: echo hello
