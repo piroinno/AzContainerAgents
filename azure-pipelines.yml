@@ -17,7 +17,7 @@ stages:
       container:
         image: ubuntu:latest
       steps:
-      - script: uname -r
+      - script: uname -a
 
     - job: HelloWindows
       pool:
@@ -25,4 +25,4 @@ stages:
       container:
         image: mcr.microsoft.com/windows/servercore:ltsc2019
       steps:
-      - script: winver
+      - script: systeminfo
