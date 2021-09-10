@@ -1,0 +1,2 @@
+FROM mcr.microsoft.com/dotnet/sdk:5.0.400-windowsservercore-ltsc2019
+RUN pwsh -Command "New-Item -Path c:\ -Name installs -ItemType directory -Force; Invoke-WebRequest https://aka.ms/installazurecliwindows -OutFile c:\installs\azcli.msi; msiexec.exe /package c:\installs\azcli.msi /quiet; Install-PackageProvider -Name NuGet -Force"
