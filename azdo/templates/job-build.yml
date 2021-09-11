@@ -11,6 +11,7 @@ jobs:
           command: 'build'
           arguments: '-c $(buildConfiguration)'
           projects: "**/*.sln"
+          zipAfterPublish: True
 
       - task: DotNetCoreCLI@2
         displayName: test
@@ -19,19 +20,29 @@ jobs:
           projects: '**/*Tests/*.csproj'
           arguments: '-c $(buildConfiguration)'
 
-      - task: ArchiveFiles@2
-        displayName: 'Archive FastCarzWebApp'
+      - task: DotNetCoreCLI@2
+        displayName: 'publish'
         inputs:
-          rootFolderOrFile: $(System.DefaultWorkingDirectory)/app/DevOpsTest/FastCarzWebApp/bin/$(BuildConfiguration)/netcoreapp3.1/FastCarzWebApp*.dll
-          includeRootFolder: false
-          archiveFile: '$(Build.ArtifactStagingDirectory)/FastCarzWebApp.zip'
+          command: 'publish'
+          publishWebProjects: false
+          projects: '**/*.csproj'
+          arguments: '-o $(Build.ArtifactStagingDirectory)/Output'
+          zipAfterPublish: true
+          modifyOutputPath: true
+          
+      # - task: ArchiveFiles@2
+      #   displayName: 'Archive FastCarzWebApp'
+      #   inputs:
+      #     rootFolderOrFile: $(System.DefaultWorkingDirectory)/app/DevOpsTest/FastCarzWebApp/bin/$(BuildConfiguration)/netcoreapp3.1/FastCarzWebApp*.dll
+      #     includeRootFolder: false
+      #     archiveFile: '$(Build.ArtifactStagingDirectory)/FastCarzWebApp.zip'
 
-      - task: ArchiveFiles@2
-        displayName: 'Archive FastCarzWebApi'
-        inputs:
-          rootFolderOrFile: $(System.DefaultWorkingDirectory)/app/DevOpsTest/FastCarzWebApi/bin/$(BuildConfiguration)/netcoreapp3.1/FastCarzWebApi*.dll
-          includeRootFolder: false
-          archiveFile: '$(Build.ArtifactStagingDirectory)/FastCarzWebApi.zip'
+      # - task: ArchiveFiles@2
+      #   displayName: 'Archive FastCarzWebApi'
+      #   inputs:
+      #     rootFolderOrFile: $(System.DefaultWorkingDirectory)/app/DevOpsTest/FastCarzWebApi/bin/$(BuildConfiguration)/netcoreapp3.1/FastCarzWebApi*.dll
+      #     includeRootFolder: false
+      #     archiveFile: '$(Build.ArtifactStagingDirectory)/FastCarzWebApi.zip'
 
       - task: PublishBuildArtifacts@1
         displayName: "Publish"
