@@ -25,11 +25,11 @@ jobs:
       #     restoreSolution: "$(Parameters.solution)"
       
       - task: DotNetCoreCLI@2
+      displayName: dotnet build
         inputs:
           command: 'build'
           arguments: '--configuration $(buildConfiguration) --platform $(BuildPlatform) --arch x64'
-          projects: |
-            "**/*.sln"
+          projects: "**/*.sln"
             
       # - task: MSBuild@1
       #   inputs:
