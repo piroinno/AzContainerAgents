@@ -21,33 +21,21 @@ jobs:
           arguments: '-c $(buildConfiguration)'
 
       - task: DotNetCoreCLI@2
-        displayName: 'publish'
+        displayName: 'archive'
         inputs:
           command: 'publish'
           publishWebProjects: false
-          projects: '**/*.csproj'
+          projects: |
+            '**/*.csproj'
+            '!*/*Test*.csproj'
           arguments: '-o $(Build.ArtifactStagingDirectory)/'
           zipAfterPublish: true
           modifyOutputPath: true
-          
-      # - task: ArchiveFiles@2
-      #   displayName: 'Archive FastCarzWebApp'
-      #   inputs:
-      #     rootFolderOrFile: $(System.DefaultWorkingDirectory)/app/DevOpsTest/FastCarzWebApp/bin/$(BuildConfiguration)/netcoreapp3.1/FastCarzWebApp*.dll
-      #     includeRootFolder: false
-      #     archiveFile: '$(Build.ArtifactStagingDirectory)/FastCarzWebApp.zip'
-
-      # - task: ArchiveFiles@2
-      #   displayName: 'Archive FastCarzWebApi'
-      #   inputs:
-      #     rootFolderOrFile: $(System.DefaultWorkingDirectory)/app/DevOpsTest/FastCarzWebApi/bin/$(BuildConfiguration)/netcoreapp3.1/FastCarzWebApi*.dll
-      #     includeRootFolder: false
-      #     archiveFile: '$(Build.ArtifactStagingDirectory)/FastCarzWebApi.zip'
 
       - task: PublishBuildArtifacts@1
         displayName: "Publish"
         inputs:
           PathtoPublish: "$(build.artifactstagingdirectory)"
           ArtifactName: "$(ArtifactName)"
-          FileCopyOptions: "/XF *test* "
+          FileCopyOptions: "/XF *Test* "
         condition: succeededOrFailed()
