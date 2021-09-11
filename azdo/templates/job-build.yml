@@ -28,7 +28,7 @@ jobs:
         displayName: dotnet build
         inputs:
           command: 'build'
-          arguments: '--configuration $(buildConfiguration) --platform $(BuildPlatform) --arch x64'
+          arguments: '--configuration $(buildConfiguration) --arch x64'
           projects: "**/*.sln"
             
       # - task: MSBuild@1
