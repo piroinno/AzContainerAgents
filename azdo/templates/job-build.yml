@@ -10,10 +10,18 @@ jobs:
         inputs:
           versionSpec: 4.4.1
 
-      - task: NuGetCommand@2
-        displayName: "NuGet restore"
+      # Replaces NuGet restore
+      - task: DotNetCoreCLI@2
+        displayName: dotnet restore
         inputs:
-          restoreSolution: "$(Parameters.solution)"
+          command: restore
+          feedsToUse: 'select'
+          includeNuGetOrg: true
+
+      # - task: NuGetCommand@2
+      #   displayName: "NuGet restore"
+      #   inputs:
+      #     restoreSolution: "$(Parameters.solution)"
 
       - task: MSBuild@1
         inputs:
