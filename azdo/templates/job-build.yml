@@ -33,7 +33,7 @@ jobs:
           includeRootFolder: false
           archiveFile: '$(Build.ArtifactStagingDirectory)/FastCarzWebApi.zip'
 
-      - task: PublishBuildArtifacts@2
+      - task: PublishBuildArtifacts@1
         displayName: "Publish"
         inputs:
           PathtoPublish: "$(build.artifactstagingdirectory)"
