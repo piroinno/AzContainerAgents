@@ -15,7 +15,7 @@ jobs:
         displayName: dotnet restore
         inputs:
           command: restore
-          projects: "**/*.csproj"
+          projects: "**/*.sln"
           feedsToUse: 'select'
           includeNuGetOrg: true
 
@@ -23,13 +23,20 @@ jobs:
       #   displayName: "NuGet restore"
       #   inputs:
       #     restoreSolution: "$(Parameters.solution)"
-
-      - task: MSBuild@1
+      
+      - task: DotNetCoreCLI@2
         inputs:
-          solution: '**/*.sln'
-          msbuildArchitecture: 'x64'
-          platform: "$(BuildPlatform)"
-          configuration: "$(BuildConfiguration)"
+          command: 'build'
+          arguments: '--configuration $(buildConfiguration) --platform $(BuildPlatform) --arch x64'
+          projects: |
+            "**/*.sln"
+            
+      # - task: MSBuild@1
+      #   inputs:
+      #     solution: '**/*.sln'
+      #     msbuildArchitecture: 'x64'
+      #     platform: "$(BuildPlatform)"
+      #     configuration: "$(BuildConfiguration)"
 
       - task: VSTest@2
         displayName: "Test"
