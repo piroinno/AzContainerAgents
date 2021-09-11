@@ -38,14 +38,20 @@ jobs:
       #     platform: "$(BuildPlatform)"
       #     configuration: "$(BuildConfiguration)"
 
-      - task: VSTest@2
-        displayName: "Test"
+      - task: DotNetCoreCLI@2
         inputs:
-          testAssemblyVer2: |
-            **\*test*.dll
-            !**\obj\**
-            platform: '$(BuildPlatform)'
-            configuration: '$(BuildConfiguration)'
+          command: test
+          projects: '**/*Tests/*.csproj'
+          arguments: '-c $(buildConfiguration)'
+          
+      # - task: VSTest@2
+      #   displayName: "Test"
+      #   inputs:
+      #     testAssemblyVer2: |
+      #       **\*test*.dll
+      #       !**\obj\**
+      #       platform: '$(BuildPlatform)'
+      #       configuration: '$(BuildConfiguration)'
 
       - task: whitesource.whiteSource-bolt-v2.bolt.wss.WhiteSource@21
         displayName: WhiteSource
