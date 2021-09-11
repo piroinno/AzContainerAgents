@@ -26,8 +26,8 @@ jobs:
           command: 'publish'
           publishWebProjects: false
           projects: |
-            '**/*.csproj'
-            '!**/*.Test*.csproj'
+            **/*.csproj
+            **/!*.Tests.csproj
           arguments: '-o $(Build.ArtifactStagingDirectory)/'
           zipAfterPublish: true
           modifyOutputPath: true
