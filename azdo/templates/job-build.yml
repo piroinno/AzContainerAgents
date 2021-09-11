@@ -27,7 +27,7 @@ jobs:
           publishWebProjects: false
           projects: |
             **/*.csproj
-            **/!*.Tests.csproj
+            !**/*.Tests.csproj
           arguments: '-o $(Build.ArtifactStagingDirectory)/'
           zipAfterPublish: true
           modifyOutputPath: true
