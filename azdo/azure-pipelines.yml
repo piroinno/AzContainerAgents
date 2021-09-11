@@ -9,10 +9,8 @@ trigger:
     - main
 
 variables:
-  Parameters.solution: $(System.DefaultWorkingDirectory)\app\DevOpsTest\DevOpsTest.sln
-  BuildPlatform: Any CPU
   BuildConfiguration: Release
-  Parameters.ArtifactName: drop
+  ArtifactName: drop
 
 stages:
   - stage: build
