@@ -25,7 +25,7 @@ jobs:
       #     restoreSolution: "$(Parameters.solution)"
       
       - task: DotNetCoreCLI@2
-      displayName: dotnet build
+        displayName: dotnet build
         inputs:
           command: 'build'
           arguments: '--configuration $(buildConfiguration) --platform $(BuildPlatform) --arch x64'
