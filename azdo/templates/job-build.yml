@@ -53,10 +53,6 @@ jobs:
       #       platform: '$(BuildPlatform)'
       #       configuration: '$(BuildConfiguration)'
 
-      - task: whitesource.whiteSource-bolt-v2.bolt.wss.WhiteSource@21
-        displayName: WhiteSource
-        inputs:
-          projectName: "$(SourceBranchName)"
 
       - task: ArchiveFiles@2
         displayName: 'Archive FastCarzWebApp'
