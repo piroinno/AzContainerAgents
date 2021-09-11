@@ -15,6 +15,7 @@ jobs:
         displayName: dotnet restore
         inputs:
           command: restore
+          projects: "$(Parameters.solution)"
           feedsToUse: 'select'
           includeNuGetOrg: true
 
