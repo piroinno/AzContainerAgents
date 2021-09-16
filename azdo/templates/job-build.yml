@@ -32,7 +32,7 @@ jobs:
           zipAfterPublish: true
           modifyOutputPath: true
 
-      - task: PublishBuildArtifacts@1
+      - task: PublishBuildArtifa  cts@1
         displayName: "Publish"
         inputs:
           PathtoPublish: "$(build.artifactstagingdirectory)"
