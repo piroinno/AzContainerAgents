@@ -9,17 +9,13 @@ jobs:
     displayName: Deploy Web Api
     environment: ${{ parameters.env }}
     pool:
-      vmImage: 'ubuntu-20.04'
+      vmImage: 'ubuntu-18.04'
     container:
         image: mcr.microsoft.com/azure-cli:latest
     strategy:
       runOnce:
         deploy:
           steps:
-            - script: |
-                /tmp/docker exec -t -u 0 ci-container \
-                sh -c "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confold" -y install sudo"
-              displayName: 'Install Sudo in container (thanks Microsoft!)'
             - task: AzureRmWebAppDeployment@4
               displayName: "Deploy API"
               inputs:
